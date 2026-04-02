@@ -19,6 +19,7 @@ header {
   padding:15px;
   font-size:22px;
   font-weight:bold;
+  box-shadow:0 0 10px rgba(255,255,255,0.2);
 }
 
 .container {
@@ -31,6 +32,7 @@ input {
   max-width:300px;
   border:none;
   border-radius:8px;
+  outline:none;
 }
 
 button {
@@ -41,16 +43,23 @@ button {
   color:white;
   cursor:pointer;
   margin-left:10px;
+  transition:0.3s;
 }
 
 button:hover {
   background:#e68900;
+  transform:scale(1.05);
 }
 
 .loader {
   display:none;
   margin-top:20px;
   font-size:18px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {opacity:0.5;}
 }
 
 .result {
@@ -61,9 +70,17 @@ button:hover {
 .card {
   background:#111;
   padding:15px;
-  margin:10px;
+  margin:10px auto;
   border-radius:10px;
-  box-shadow:0 0 10px rgba(255,255,255,0.1);
+  width:90%;
+  max-width:400px;
+  box-shadow:0 0 15px rgba(255,255,255,0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
 }
 </style>
 
@@ -94,7 +111,7 @@ function getStatus(){
   document.getElementById("loader").style.display="block";
   document.getElementById("result").innerHTML="";
 
-  fetch("https://irctc1.p.rapidapi.com/trainLiveStatus?trainNo=" + train + "&startDay=1", {
+  fetch("https://corsproxy.io/?https://irctc1.p.rapidapi.com/trainLiveStatus?trainNo=" + train + "&startDay=1", {
     method: "GET",
     headers: {
       "X-RapidAPI-Key": "a61c2cb28dmsh816a4962cd342cfp1a4f90jsn0183cae83615",
@@ -105,23 +122,23 @@ function getStatus(){
   .then(data => {
     document.getElementById("loader").style.display="none";
 
-    if(data.status == false){
-      document.getElementById("result").innerHTML = "❌ Invalid Train Number";
+    if(!data || data.status === false){
+      document.getElementById("result").innerHTML = "❌ Invalid Train Number / API Limit";
       return;
     }
 
     let d = data.data;
 
     document.getElementById("result").innerHTML = `
-      <div class="card">🚆 Train: ${d.train_name}</div>
-      <div class="card">📍 Current Station: ${d.current_station_name}</div>
-      <div class="card">⏱ Delay: ${d.delay} min</div>
-      <div class="card">📌 Status: ${d.status}</div>
+      <div class="card">🚆 Train: ${d.train_name || 'N/A'}</div>
+      <div class="card">📍 Current Station: ${d.current_station_name || 'N/A'}</div>
+      <div class="card">⏱ Delay: ${d.delay || 0} min</div>
+      <div class="card">📌 Status: ${d.status || 'N/A'}</div>
     `;
   })
   .catch(err => {
     document.getElementById("loader").style.display="none";
-    document.getElementById("result").innerHTML = "Error loading data";
+    document.getElementById("result").innerHTML = "⚠️ Error loading data (CORS / API issue)";
   });
 }
 </script>
