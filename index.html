@@ -266,6 +266,163 @@ function closePlayer(){
 document.getElementById("player").style.display="none";
 document.getElementById("video").src="";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyFlix OTT</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+
+body{background:#0b0f19;color:#fff;}
+
+/* HEADER */
+.header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#000;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  z-index:1000;
+}
+
+.logo{color:#00c3ff;font-size:22px;font-weight:bold;}
+.menu a{margin:0 10px;color:#bbb;text-decoration:none;}
+.menu a:hover{color:#fff;}
+
+/* CONTENT */
+.content{
+  margin-top:70px;
+  padding:20px;
+}
+
+/* ROW */
+.row{margin-bottom:30px;}
+.row h2{margin-bottom:10px;}
+
+.posters{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+}
+
+.poster{
+  min-width:150px;
+  height:220px;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* PLAYER PAGE */
+.player-page{
+  display:none;
+}
+
+.player iframe{
+  width:100%;
+  height:60vh;
+}
+
+.back{
+  margin:10px 0;
+  cursor:pointer;
+  color:#00c3ff;
+}
+
+/* FOOTER */
+.footer{
+  background:#000;
+  padding:15px;
+  text-align:center;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">MyFlix</div>
+  <div class="menu">
+    <a href="#" onclick="goHome()">Home</a>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content" id="home">
+
+<!-- ROW -->
+<div class="row">
+<h2>🔥 Trending</h2>
+<div class="posters">
+
+<div class="poster" onclick="openMovie('Avengers','https://www.youtube.com/embed/TcMBFSGVi1c','https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg')">
+<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+</div>
+
+<div class="poster" onclick="openMovie('Joker','https://www.youtube.com/embed/zAGVQLHvwOY','https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg')">
+<img src="https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg">
+</div>
+
+<div class="poster" onclick="openMovie('Spiderman','https://www.youtube.com/embed/YoHD9XEInc0','https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg')">
+<img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
+</div>
+
+<div class="poster" onclick="openMovie('Batman','https://www.youtube.com/embed/EXeTwQWrcwY','https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg')">
+<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- PLAYER PAGE -->
+<div class="content player-page" id="playerPage">
+
+<div class="back" onclick="goHome()">⬅ Back</div>
+
+<h1 id="movieTitle"></h1>
+
+<div class="player">
+<iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 MyFlix OTT
+</div>
+
+<script>
+
+function openMovie(title,video,poster){
+  document.getElementById("home").style.display="none";
+  document.getElementById("playerPage").style.display="block";
+
+  document.getElementById("movieTitle").innerText=title;
+  document.getElementById("videoFrame").src=video;
+}
+
+function goHome(){
+  document.getElementById("home").style.display="block";
+  document.getElementById("playerPage").style.display="none";
+  document.getElementById("videoFrame").src="";
+}
+
 </script>
 
 </body>
