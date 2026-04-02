@@ -1,20 +1,272 @@
-<h2>🔥 Latest Movies</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyFlix Ultra</title>
 
-<div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
-  <div>
-    <img src="https://via.placeholder.com/150x220" />
-    <p>Movie 1</p>
+body{
+  background:#0b0f19;
+  color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  width:100%;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+.logo{
+  font-size:26px;
+  font-weight:bold;
+  color:#00c3ff;
+}
+
+.menu a{
+  margin:0 10px;
+  color:#bbb;
+  text-decoration:none;
+}
+
+.menu a:hover{color:#fff;}
+
+.search input{
+  padding:6px 12px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+}
+
+/* HERO SLIDER */
+.slider{
+  margin-top:70px;
+  height:70vh;
+  position:relative;
+  overflow:hidden;
+}
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:1s;
+}
+
+.slide.active{opacity:1;}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.gradient{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:50%;
+  background:linear-gradient(transparent, #0b0f19);
+}
+
+.overlay{
+  position:absolute;
+  bottom:60px;
+  left:30px;
+}
+
+.overlay h1{font-size:45px;}
+.overlay p{margin:10px 0;color:#ccc;}
+.overlay button{
+  padding:10px 20px;
+  border:none;
+  background:#00c3ff;
+  color:#fff;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+/* ROW */
+.row{margin:25px;}
+.row h2{margin-bottom:10px;}
+
+.posters{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+}
+
+.posters::-webkit-scrollbar{display:none;}
+
+.poster{
+  min-width:160px;
+  height:240px;
+  border-radius:10px;
+  overflow:hidden;
+  transition:0.3s;
+}
+
+.poster img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.poster:hover{
+  transform:scale(1.15);
+}
+
+/* PLAYER */
+.player{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#000;
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.player iframe{
+  width:90%;
+  height:80%;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .overlay h1{font-size:25px;}
+  .poster{min-width:120px;height:180px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">MyFlix</div>
+  <div class="menu">
+    <a href="#">Home</a>
+    <a href="#">Movies</a>
+    <a href="#">TV</a>
   </div>
-
-  <div>
-    <img src="https://via.placeholder.com/150x220" />
-    <p>Movie 2</p>
+  <div class="search">
+    <input type="text" placeholder="Search movies...">
   </div>
+</div>
 
-  <div>
-    <img src="https://via.placeholder.com/150x220" />
-    <p>Movie 3</p>
-  </div>
+<!-- SLIDER -->
+<div class="slider">
+
+<div class="slide active">
+<img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1">
+<div class="gradient"></div>
+<div class="overlay">
+<h1>Avengers Endgame</h1>
+<p>Epic Marvel finale</p>
+<button onclick="play('https://www.youtube.com/embed/TcMBFSGVi1c')">▶ Play</button>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f">
+<div class="gradient"></div>
+<div class="overlay">
+<h1>Batman Dark Knight</h1>
+<button onclick="play('https://www.youtube.com/embed/EXeTwQWrcwY')">▶ Play</button>
+</div>
+</div>
 
 </div>
+
+<!-- ROW 1 -->
+<div class="row">
+<h2>🔥 Trending</h2>
+<div class="posters">
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/6ZfuNTqbHE8')">
+<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
+</div>
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/YoHD9XEInc0')">
+<img src="https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg">
+</div>
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/8ugaeA-nMTc')">
+<img src="https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg">
+</div>
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/zAGVQLHvwOY')">
+<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
+</div>
+
+</div>
+</div>
+
+<!-- ROW 2 -->
+<div class="row">
+<h2>🎬 Popular</h2>
+<div class="posters">
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/Q0CbN8sfihY')">
+<img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg">
+</div>
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/TcMBFSGVi1c')">
+<img src="https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg">
+</div>
+
+<div class="poster" onclick="play('https://www.youtube.com/embed/EXeTwQWrcwY')">
+<img src="https://image.tmdb.org/t/p/w500/9O1Iy9od7m9h0h1X3k9w7w6k7Bz.jpg">
+</div>
+
+</div>
+</div>
+
+<!-- PLAYER -->
+<div class="player" id="player">
+<span class="close" onclick="closePlayer()">✖</span>
+<iframe id="video" src="" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+let slides=document.querySelectorAll('.slide');
+let i=0;
+setInterval(()=>{
+slides[i].classList.remove('active');
+i=(i+1)%slides.length;
+slides[i].classList.add('active');
+},4000);
+
+function play(link){
+document.getElementById("player").style.display="flex";
+document.getElementById("video").src=link;
+}
+
+function closePlayer(){
+document.getElementById("player").style.display="none";
+document.getElementById("video").src="";
+}
+</script>
+
+</body>
+</html>
